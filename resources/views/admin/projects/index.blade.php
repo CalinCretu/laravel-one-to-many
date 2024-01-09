@@ -20,6 +20,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Description</th>
+                        <th>Type</th>
                         {{-- <th>Start Date</th> --}}
                         {{-- <th>End Date</th> --}}
                         <th>Status</th>
@@ -38,6 +39,7 @@
                                     {{ $project->name }}</a>
                             </td>
                             <td>{{ $project->description }}</td>
+                            <td>{{ isset($project->type) ? $project->type->name : '-' }}</td>
                             <td>{{ $project->status }}</td>
                             <td>
                                 <a href="{{ route('admin.projects.edit', $project) }}"><button

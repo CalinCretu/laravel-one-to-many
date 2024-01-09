@@ -4,6 +4,9 @@
         <div class="container">
             <div class="container">
                 <h1>{{ $project->name }}</h1>
+                @if ($project->type)
+                    <p><strong>{{ isset($project->type) ? $project->type->name : '-' }}</strong></p>
+                @endif
                 <p>{{ $project->description }}</p>
                 <p>{{ $project->start_date }}</p>
                 <p>{{ $project->end_date }}</p>
@@ -18,11 +21,9 @@
                         <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
                             @csrf
                             @method('DELETE')
-
                             <input class="btn btn-danger btn-sm" type="submit" value="Delete">
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>

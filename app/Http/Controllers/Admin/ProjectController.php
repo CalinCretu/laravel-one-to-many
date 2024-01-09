@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Type;
 use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
@@ -24,7 +25,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $types = Type::orderBy('name', 'ASC')->get();
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -37,7 +39,8 @@ class ProjectController extends Controller
             'description' => 'required|string|max:255',
             'start_date' => 'required',
             'end_date' => 'nullable',
-            'status' => 'required'
+            'status' => 'required',
+            'type_id' => 'nullable|exists:types,id'
         ]);
 
         $data = $request->all();
@@ -59,7 +62,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::orderBy('name', 'ASC')->get();
+
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -67,6 +72,9 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
+        $request->validate([
+            'type_id' => 'nullable|exists:types,id'
+        ]);
         $data = $request->all();
         $project->update($data);
         return redirect()->route('admin.projects.show', $project);
