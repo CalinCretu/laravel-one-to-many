@@ -20,7 +20,7 @@ class ProjectSeeder extends Seeder
             $new_project->name = $faker->name();
             $new_project->description = $faker->paragraph(4);
             $new_project->start_date = $faker->dateTimeThisCentury();
-            $new_project->end_date = $faker->optional(0.7)->dateTimeThisCentury('+5 years');
+            $new_project->end_date = $faker->optional(0.7)->dateTimeThisCentury('+2 years');
             $new_project->status = $faker->randomElement(['pending', 'ongoing', 'completed']);
 
             $new_project->save();

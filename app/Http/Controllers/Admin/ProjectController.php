@@ -33,8 +33,16 @@ class ProjectController extends Controller
     {
         $request->validate([
             'name' => 'required|max:30|min:2|string',
-            'description' => 'required|string|max:255'
+            'description' => 'required|string|max:255',
+            'start_date' => 'required',
+            'end_date' => 'nullable',
+            'status' => 'required'
         ]);
+
+        $data = $request->all();
+        $project = Project::create($data);
+
+        return redirect()->route('admin.projects.show', $project);
     }
 
     /**
