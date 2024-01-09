@@ -31,7 +31,10 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:30|min:2|string',
+            'description' => 'required|string|max:255'
+        ]);
     }
 
     /**
