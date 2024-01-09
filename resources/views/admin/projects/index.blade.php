@@ -4,6 +4,18 @@
         <div class="container">
             <table class="table table-striped">
                 <thead>
+                    {{-- <tr>
+                        <td></td>
+                        <td>
+                            <form action="{{ route('admin.projects.index') }}" method="GET">
+                                <input class="form-control" type="text" name="name">
+                            </form>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr> --}}
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
