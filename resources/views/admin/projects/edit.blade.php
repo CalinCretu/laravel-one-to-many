@@ -2,7 +2,7 @@
 @section('content')
     <section>
         <div class="container">
-            <form action="{{ route('admin.projects.store') }}" method="POST">
+            <form action="{{ route('admin.projects.update', $project) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
@@ -34,7 +34,7 @@
                     <textarea class="form-control" name="description" id="description" rows="3" placeholder="Project Description">{{ old('description', $project->description) }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <input type="submit" class="btn btn-primary" value="Crea">
+                    <input type="submit" class="btn btn-primary" value="Edit">
                 </div>
             </form>
             @if ($errors->any())

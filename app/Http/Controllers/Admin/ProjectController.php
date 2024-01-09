@@ -67,11 +67,9 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        $request->validate([
-            'name' => ['required', 'max:15', 'string', Rule::unique('projects')
-                ->ignore($project->id)],
-            'content' => 'nullable|min:5|string'
-        ]);
+        $data = $request->all();
+        $project->update($data);
+        return redirect()->route('admin.projects.show', $project);
     }
 
     /**
@@ -79,6 +77,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect()->route('admin.projects.index');
     }
 }
